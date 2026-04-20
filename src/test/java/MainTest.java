@@ -40,4 +40,4 @@ public class MainTest {
         Assert.assertTrue(Main.compare(sb1, sb2) > 0);
 
 }
-    
+}
