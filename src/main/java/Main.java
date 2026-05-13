@@ -6,6 +6,7 @@ public class Main {
         System.out.println("Enter text:");
         StringBuffer input = new StringBuffer(scanner.nextLine());
         scanner.close();
+
         StringBuffer[] words = new StringBuffer[100];
         int wordCount = 0;
         int start = 0;
@@ -25,7 +26,9 @@ public class Main {
 
         for (int i = 0; i < wordCount; i++) {
             for (int j = i + 1; j < wordCount; j++) {
-                if (compare(words[i], words[j]) > 0) {
+                char c1 = Character.toLowerCase(words[i].charAt(0));
+                char c2 = Character.toLowerCase(words[j].charAt(0));
+                if (c1 > c2) {
                     StringBuffer temp = words[i];
                     words[i] = words[j];
                     words[j] = temp;
@@ -33,29 +36,13 @@ public class Main {
             }
         }
 
-        System.out.println("\n Sorted text:");
+        System.out.println("\nSorted unique words (by first letter):");
         for (int i = 0; i < wordCount; i++) {
-            if (i > 0 && compare(words[i], words[i - 1]) == 0) {
+            if (i > 0 && Character.toLowerCase(words[i].charAt(0)) ==
+                         Character.toLowerCase(words[i - 1].charAt(0))) {
                 continue;
             }
             System.out.print(words[i].toString() + " ");
         }
-    }
-
-    public static int compare(StringBuffer sb1, StringBuffer sb2) {
-        int len1 = sb1.length();
-        int len2 = sb2.length();
-        int lim = Math.min(len1, len2);
-
-        int k = 0;
-        while (k < lim) {
-            char c1 = sb1.charAt(k);
-            char c2 = sb2.charAt(k);
-            if (c1 != c2) {
-                return c1 - c2;
-            }
-            k++;
-        }
-        return len1 - len2;
     }
 }
